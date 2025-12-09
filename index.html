@@ -3,6 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Security Headers (client-side) -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer">
+
+  <!-- Permissions Policy (disables risky browser APIs) -->
+  <meta http-equiv="Permissions-Policy" content="
+    geolocation=(),
+    microphone=(),
+    camera=(),
+    payment=(),
+    usb=(),
+    accelerometer=(),
+    ambient-light-sensor=(),
+    autoplay=(self),
+    clipboard-read=(self),
+    clipboard-write=(self)
+  ">
+
+  <!-- Content Security Policy (core protection) -->
+  <meta http-equiv="Content-Security-Policy" 
+        content="
+          default-src 'self';
+          script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com;
+          style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+          img-src 'self' data:;
+          font-src 'self' https://cdn.jsdelivr.net;
+          connect-src 'self';
+          media-src 'self';
+          frame-ancestors 'none';
+        ">
 
   <title>Kmart Prototype - Isaac Chaffey</title>
   <link rel="icon" type="image/ico" href="assets/logos/kmartFavicon.ico">
