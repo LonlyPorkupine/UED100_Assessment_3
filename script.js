@@ -263,9 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartCount.textContent = totalItems;
     cartCount.style.display = totalItems > 0 ? "inline-block" : "none";
 
-    // =========================
     // Update floating cart count
-    // =========================
     if (floatingCartBtn) {
         const floatingCartCount = floatingCartBtn.querySelector("#floating-cart-count");
         if (floatingCartCount) {
@@ -275,19 +273,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     }
 
-    // =========================
-    // 
-    // =========================
-    const topNavbar = document.querySelector('.navbar'); // adjust if your navbar has a different class
+    // ======================================
+    // APEAR AND DISAPEAR FLOATING CART BUTTON
+    // ======================================
+    const topNavbar = document.querySelector('.navbar'); 
 
     window.addEventListener('scroll', () => {
     const navbarBottom = topNavbar.getBoundingClientRect().bottom;
 
     if (navbarBottom < 0) {
-        // User has scrolled past navbar → show floating cart
+        // Shows floating cart when user has scrolled past navbar
         floatingCartBtn.style.display = 'flex';
     } else {
-        // Navbar still visible → hide floating cart
+        // Hides floating cart if navbar still visible
         floatingCartBtn.style.display = 'none';
     }
     });
@@ -322,6 +320,31 @@ document.addEventListener("DOMContentLoaded", () => {
         cart = [];
         updateCart();
     });
+
+    // Quantity + and -
+    cartItemsContainer.addEventListener("click", (e) => {
+        // + button
+        if (e.target.classList.contains("plus")) {
+            const index = parseInt(e.target.dataset.index);
+            cart[index].quantity += 1;
+            updateCart();
+            return;
+        }
+
+        // − button
+        if (e.target.classList.contains("minus")) {
+            const index = parseInt(e.target.dataset.index);
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                // Optional: prevent going below 1 or remove item
+                cart.splice(index, 1);
+            }
+            updateCart();
+            return;
+        }
+    });
+
 
     // Checkout button functionality
     checkoutBtn.addEventListener("click", () => {
