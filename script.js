@@ -256,23 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
         total += parseFloat(item.price) * item.quantity;
     });
 
-    document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("plus")) {
-        const i = e.target.dataset.index;
-        cart[i].quantity++;
-        updateCart();
-    }
-
-    if (e.target.classList.contains("minus")) {
-        const i = e.target.dataset.index;
-        if (cart[i].quantity > 1) {
-            cart[i].quantity--;
-        }
-        updateCart();
-    }
-    });
-
-
     cartTotal.textContent = total.toFixed(2);
 
     // Update main cart count
@@ -289,6 +272,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     }
+
+    document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("plus")) {
+        const i = e.target.dataset.index;
+        cart[i].quantity++;
+        updateCart();
+    }
+
+    if (e.target.classList.contains("minus")) {
+        const i = e.target.dataset.index;
+        if (cart[i].quantity > 1) {
+            cart[i].quantity--;
+        }
+        updateCart();
+    }
+    });
 
     // ======================================
     // APEAR AND DISAPEAR FLOATING CART BUTTON
