@@ -256,6 +256,23 @@ document.addEventListener("DOMContentLoaded", () => {
         total += parseFloat(item.price) * item.quantity;
     });
 
+    document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("plus")) {
+        const i = e.target.dataset.index;
+        cart[i].quantity++;
+        updateCart();
+    }
+
+    if (e.target.classList.contains("minus")) {
+        const i = e.target.dataset.index;
+        if (cart[i].quantity > 1) {
+            cart[i].quantity--;
+        }
+        updateCart();
+    }
+    });
+
+
     cartTotal.textContent = total.toFixed(2);
 
     // Update main cart count
@@ -320,31 +337,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cart = [];
         updateCart();
     });
-
-    // Quantity + and -
-    cartItemsContainer.addEventListener("click", (e) => {
-        // + button
-        if (e.target.classList.contains("plus")) {
-            const index = parseInt(e.target.dataset.index);
-            cart[index].quantity += 1;
-            updateCart();
-            return;
-        }
-
-        // − button
-        if (e.target.classList.contains("minus")) {
-            const index = parseInt(e.target.dataset.index);
-            if (cart[index].quantity > 1) {
-                cart[index].quantity -= 1;
-            } else {
-                // Optional: prevent going below 1 or remove item
-                cart.splice(index, 1);
-            }
-            updateCart();
-            return;
-        }
-    });
-
 
     // Checkout button functionality
     checkoutBtn.addEventListener("click", () => {
