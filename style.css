@@ -1,0 +1,634 @@
+/* =====================================================================================
+   Kmart Theme – Global Variables
+===================================================================================== */
+:root {
+    --kmart-red: #e00034;
+    --kmart-blue: #005eb8;
+    --kmart-white: #ffffff;
+    --kmart-grey: #f4f4f4;
+    --text-dark: #333333;
+}
+
+/* =====================================================================================
+   Global Styling
+===================================================================================== */
+body {
+    margin: 0;
+    font-family: "AnkoModerat", Helvetica, Arial, sans-serif;
+    background: var(--kmart-white);
+    color: var(--text-dark);
+}
+
+/* Kmart Button (used on product cards & contact form) */
+.kmart-btn {
+    background-color: var(--kmart-blue);
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.kmart-btn:hover {
+    background-color: var(--kmart-red);
+    color: white;
+}
+
+/* ============================================================
+   UPPER NAVIGATION BAR
+============================================================ */
+
+/* Wrapper for search bar */
+.nav-search .search-wrapper {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 700px;
+  max-width: 100%;
+}
+
+/* desktop search bar responsiveness */
+.nav-search .search-wrapper {
+  width: clamp(250px, 40vw, 6600px);
+}
+
+/* Input field styling */
+.nav-search input.form-control {
+  border: none;
+  border-radius: 0;
+  padding: 14px 14px;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+/* Button styling */
+.nav-search button.btn {
+  color: #fff;
+  border-radius: 0;
+  padding: 14px 14px;
+  background-color: #253746;
+  border: none;
+}
+
+.nav-search button.btn:hover {
+  background-color: var(--kmart-blue);
+}
+
+/* .btn-search class */
+.btn-search {
+  color: #fff !important;
+  background-color: #253746 !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  border: none !important;
+}
+
+.btn-search:hover {
+  background-color: var(--kmart-blue) !important;
+}
+
+/* ============================================================
+   LOWER NAVIGATION LAYOUT
+============================================================ */
+
+/* Alligns top navbar elements */
+.top-navbar {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+/* Center search bar on desktop */
+@media (min-width: 991px) {
+  .top-navbar .search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* Cart icon sizing */
+#cart-icon i,
+#cart-icon {
+  font-size: 1.6rem;
+  color: #253746;
+}
+
+/* floating cart styling */
+#floating-cart-btn {
+  background: #005eb8;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#floating-cart-btn .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.icon-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #253746;
+}
+
+/* Adjust the bottom category navigation */
+.lower-navbar {
+  border-top: 1px solid #eee;
+  background: #f8f9fa;
+}
+
+/* Hover dropdown on desktop */
+@media (min-width: 992px) {
+  .lower-navbar .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Dropdown menu styling */
+.lower-navbar .dropdown-menu {
+  margin-top: 0; /* removes the "jump" */
+  border-radius: 0;
+}
+
+/* Category link styling */
+.lower-navbar .nav-link {
+  padding: 10px 16px;
+  font-weight: 600;
+  color: #253746;
+}
+
+.lower-navbar .nav-link:hover {
+  color: #005bb5;
+}
+
+/* Keep logo, search, cart aligned correctly */
+.top-navbar .navbar-brand img {
+  height: 70px;
+}
+
+/* ===========================================
+   ANNOUNCEMENT BANNER
+============================================== */
+/* Red and green horizontal stipes on banner */
+.striped-banner {
+  background: repeating-linear-gradient(
+    45deg, 
+    #D32F2F,
+    #D32F2F 20px,
+    #388E3C 20px,
+    #388E3C 40px
+  );
+  color: white;
+}
+
+/* =======================================
+   PRODUCT GRID
+==========================================*/
+.product-grid {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.add-btn {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: var(--kmart-blue);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.add-btn:hover {
+    background: var(--kmart-red);
+}
+
+/* =========================================
+   CONTACT FORM
+============================================ */
+.contact-form {
+    padding: 2rem 1rem;
+    background: var(--kmart-grey);
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    gap: 0.8rem;
+}
+
+input,
+textarea {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #777;
+}
+
+.submit-btn {
+    padding: 0.8rem;
+}
+
+/* Tooltip for validation errors */
+.tooltip {
+    display: none;
+    color: red;
+    font-size: 0.85rem;
+    margin-left: 8px;
+}
+
+.success-msg {
+    color: #ffffff;
+    background-color: #005eb8;
+    border: 2px solid #e00034;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: slideDown 0.5s ease forwards;
+}
+
+/* Simple slide-down animation */
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/*=========================
+    CART SIDEBAR PANEL 
+ ==========================*/
+#cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden by default */
+  width: 350px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  padding: 1rem;
+  transition: right 0.3s ease;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* cart sidebar active state */
+#cart-sidebar.active {
+  right: 0; /* slide into view */
+}
+
+/* cart header */
+#cart-sidebar .cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* cart header close button */
+#cart-sidebar .cart-header button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* cart items container */
+#cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+/* individual cart item */
+#cart-sidebar .cart-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* cart item image */
+#cart-sidebar .cart-item img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* cart item details (name + price) */
+.cart-item-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.cart-item-details span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* cart item controls (quantity + remove button) */
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-item-controls input.item-qty {
+  width: 50px;
+  padding: 0.25rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.cart-item-controls button.remove-item {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #e00034;
+  color: white;
+  cursor: pointer;
+}
+
+.cart-item-controls button.remove-item:hover {
+  background-color: #c0002a;
+}
+
+/* Cart quantiy + & - buttons */
+.qty-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+    font-weight: bold;
+}
+
+/* Blue plus button */
+.qty-btn.plus {
+    background: var(--kmart-blue);
+}
+
+.qty-btn.plus:hover {
+    background: #004a93;
+}
+
+/* Red minus button */
+.qty-btn.minus {
+    background: var(--kmart-red);
+}
+
+.qty-btn.minus:hover {
+    background: #b8002a;
+}
+
+.qty-display {
+    min-width: 28px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* cart footer (total + buttons) */
+#cart-sidebar .cart-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+#cart-sidebar .cart-footer button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+}
+
+/* checkout button */
+#cart-sidebar .checkout-btn {
+  background-color: #005eb8;
+}
+
+/* clear cart button */
+#cart-sidebar .clear-btn {
+  background-color: #e00034;
+}
+
+/* cart overlay */
+#cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1040;
+}
+
+#cart-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* =====================================================
+   MOBILE SEARCH BAR — FULL WIDTH BETWEEN TOP AND BOTTOM NAV
+======================================================== */
+
+@media (max-width: 991px) {
+  .mobile-search-container {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    order: 2;
+  }
+
+  .nav-search .search-wrapper {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .nav-search input.form-control {
+    padding: 14px 16px;
+    font-size: 1rem;
+  }
+
+  .nav-search button.btn,
+  .btn-search {
+    padding: 14px 16px !important;
+  }
+}
+
+
+/* =====================================================
+  STICKY VIEW CART BUTTON
+======================================================== */
+
+#floating-cart-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--kmart-blue);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 999;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+#floating-cart-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   MOBILE ENHANCEMENTS
+============================================= */
+
+/* General mobile padding */
+section {
+    padding: 2rem 1rem;
+}
+
+/* logo responsiveness for mobile and tablet */
+@media (max-width:991px) {
+    .navbar-brand img {
+      transform: scale(0.80);
+    }
+}
+
+/* logo responsiveness for small mobiles */
+@media (max-width:576px) {
+    .navbar-brand img {
+      transform: scale(0.70);
+    }
+}
+
+/* icon responsiveness on small mobiles */
+@media (max-width: 576px) {
+    .nav-link.fs-4 i {
+      font-size: 1,2rem;
+    }
+
+    .nav-link.fs-4 .icon-label {
+      font-size: 0.75rem;
+    }
+}
+
+/* logo and hamburger menu bootstrap padding override */
+@media (max-width: 767px) {
+    .navbar.navbar-expand-lg .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+}
+
+/* hides floating cart button */
+#floating-cart-btn {
+    display: none;
+}
+
+/* shows floating cart button on small mobile screens */
+@media (max-width: 768px) {
+    #floating-cart-btn {
+        display: flex;
+    }
+}
+
+/* Product cards on mobile */
+@media (max-width: 576px) {
+    .card {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    .card img {
+        border-radius: 6px;
+    }
+    .kmart-btn {
+        width: 100%;
+        padding: 0.8rem;
+    }
+}
+
+/* Contact form on mobile */
+@media (max-width: 576px) {
+    #contactUs form {
+        width: 100%;
+        padding: 1rem;
+    }
+    input, textarea {
+        font-size: 1rem;
+    }
+}
