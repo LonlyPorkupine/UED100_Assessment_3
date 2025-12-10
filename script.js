@@ -64,7 +64,7 @@ $(document).ready(function() {
         // Remove any existing success messages
         $('.success-msg').remove();
 
-        // Show enhanced success message dynamically
+        // Success message
         $('<div class="success-msg" role="alert" aria-live="assertive">Thank you! Your message has been sent.</div>')
             .css({
                 color: '#ffffff',
@@ -273,6 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     }
 
+    // Event listeners for quantity modification buttons
     document.addEventListener("click", function (e) {
     if (e.target.classList.contains("plus")) {
         const i = e.target.dataset.index;
@@ -310,63 +311,81 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===========================
     // CART SIDEBAR EVENTS
     // ===========================
-    // Remove single item from cart
+
+    // Remove a single item from the cart when the "remove" button is clicked
     cartItemsContainer.addEventListener("click", (e) => {
+        // Check if the clicked element has the "remove-item" class
         if (e.target.classList.contains("remove-item")) {
+            // Get the index of the cart item from the data attribute
             const index = parseInt(e.target.closest(".cart-item").dataset.index);
+            // Remove the item from the cart array
             cart.splice(index, 1);
+            // Update the cart UI and totals
             updateCart();
         }
     });
 
-    // Update quantity input
+    // Update quantity when user changes the input value
     cartItemsContainer.addEventListener("input", (e) => {
+        // Check if the input element has the "item-qty" class
         if (e.target.classList.contains("item-qty")) {
+            // Get the index of the cart item
             const index = parseInt(e.target.closest(".cart-item").dataset.index);
+            // Get the input value and ensure it is at least 1
             let qty = parseInt(e.target.value);
             if (qty < 1) qty = 1;
             e.target.value = qty;
+            // Update the quantity in the cart array
             cart[index].quantity = qty;
+            // Update the cart UI and totals
             updateCart();
         }
     });
 
-    // Clear all items from cart
+    // Clear all items from the cart when the "clear cart" button is clicked
     clearCartBtn.addEventListener("click", () => {
-        cart = [];
-        updateCart();
+        cart = []; // Empty the cart array
+        updateCart(); // Refresh the cart UI
     });
 
     // Checkout button functionality
     checkoutBtn.addEventListener("click", () => {
         if (cart.length === 0) {
+            // Show a message if the cart is empty
             showCartMessage("Your cart is empty!");
             return;
         }
+        // Get the total amount from the cart total element
         const total = cartTotal.textContent;
+        // Show a success message with the total
         showCartMessage(`Checkout successful! Total: $${total}`);
+        // Empty the cart after checkout
         cart = [];
         updateCart();
     });
 
-    // Close cart sidebar when clicking close button or overlay
+    // Close the cart sidebar when clicking any close button or overlay
     closeCartButtons.forEach(el => {
         el.addEventListener("click", closeCart);
     });
 
-    // Open cart sidebar when clicking cart icon
+    // Open the cart sidebar when clicking the cart icon
     cartIcon.addEventListener("click", (e) => {
-        e.preventDefault();
-        openCart();
+        e.preventDefault(); // Prevent default link behavior if cart icon is a link
+        openCart(); // Open the cart sidebar
     });
 
     // ===========================
     // SHOW TEMPORARY CART MESSAGE
     // ===========================
+
     function showCartMessage(text) {
+        // Create a new div element for the message
         const msg = document.createElement("div");
-        msg.className = "success-msg";
-        msg.textContent = text;
+        msg.className = "success-msg"; // Add class for styling
+        msg.textContent = text; // Set the message text
+
+        // Apply inline styles to the message
         Object.assign(msg.style, {
             backgroundColor: "#005eb8",
             color: "white",
@@ -377,56 +396,80 @@ document.addEventListener("DOMContentLoaded", () => {
             marginTop: "10px",
             textAlign: "center"
         });
-        cartMessageContainer.appendChild(msg);
-        setTimeout(() => msg.remove(), 3600); // Remove after 3.6 seconds
-    }
 
+        // Add the message to the cart message container
+        cartMessageContainer.appendChild(msg);
+
+        // Remove the message automatically after 3.6 seconds
+        setTimeout(() => msg.remove(), 3600);
+    }
 
     // ===========================
     // SEARCH BAR FUNCTION
     // ===========================
+
+    // Add an event listener to the search form to handle the 'submit' event
     document.getElementById('searchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+        // Prevent the default form submission behavior (page reload)
+        e.preventDefault();
 
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    const resultsGrid = document.getElementById('search-results-grid');
-    const resultsTitle = document.getElementById('search-results-title');
+        // Get the search input value, convert to lowercase, and trim whitespace
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
-    resultsGrid.innerHTML = '';
+        // Get references to the results container and results title elements
+        const resultsGrid = document.getElementById('search-results-grid');
+        const resultsTitle = document.getElementById('search-results-title');
 
-    const filteredRegular = regularProducts
-        .filter(p => p.name.toLowerCase().includes(query))
-        .map(p => p.name);
-
-    const filteredChristmas = christmasProducts
-        .filter(p => p.name.toLowerCase().includes(query))
-        .map(p => p.name);
-
-    const allNames = [...filteredRegular, ...filteredChristmas];
-
-    if (allNames.length > 0 && query !== '') {
-        resultsTitle.style.display = 'block';
-        resultsTitle.textContent = `Search Results for "${query}"`;
-
-        const fullResults = allNames.map(name => getProductByName(name));
-        generateProductGrid('search-results-grid', fullResults);
-
-        // ✅ Mobile fix: scroll and blur
-        document.getElementById('search-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        document.getElementById('searchInput').blur();
-
-    } else if (query !== '') {
-        resultsTitle.style.display = 'block';
-        resultsTitle.textContent = `No results found for "${query}"`;
-    } else {
-        resultsTitle.style.display = 'none';
+        // Clear any previous search results
         resultsGrid.innerHTML = '';
-    }
+
+        // Filter regular products that match the search query (case-insensitive)
+        const filteredRegular = regularProducts
+            .filter(p => p.name.toLowerCase().includes(query))
+            .map(p => p.name); // Extract only the product names
+
+        // Filter Christmas products that match the search query
+        const filteredChristmas = christmasProducts
+            .filter(p => p.name.toLowerCase().includes(query))
+            .map(p => p.name); // Extract only the product names
+
+        // Combine filtered results from both categories
+        const allNames = [...filteredRegular, ...filteredChristmas];
+
+        if (allNames.length > 0 && query !== '') {
+            // If there are matching results and the query is not empty
+
+            // Display the results title and show the query
+            resultsTitle.style.display = 'block';
+            resultsTitle.textContent = `Search Results for "${query}"`;
+
+            // Retrieve full product objects by name
+            const fullResults = allNames.map(name => getProductByName(name));
+
+            // Generate the product grid to display the search results
+            generateProductGrid('search-results-grid', fullResults);
+
+            // Scroll to the search results section (smoothly) for better UX on mobile
+            document.getElementById('search-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Remove focus from the search input
+            document.getElementById('searchInput').blur();
+
+        } else if (query !== '') {
+            // If no results found but the query is not empty
+            resultsTitle.style.display = 'block';
+            resultsTitle.textContent = `No results found for "${query}"`;
+        } else {
+            // If the search query is empty, hide the results title and clear the grid
+            resultsTitle.style.display = 'none';
+            resultsGrid.innerHTML = '';
+        }
     });
 
+    // Helper function to find a product object by name
     function getProductByName(name) {
+        // Search regular products first, then Christmas products
         return regularProducts.find(p => p.name === name) ||
             christmasProducts.find(p => p.name === name);
     }
-
 });

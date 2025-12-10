@@ -499,9 +499,9 @@ textarea::placeholder {
   pointer-events: all;
 }
 
-/* =====================================================
-   MOBILE SEARCH BAR — FULL WIDTH BETWEEN TOP AND BOTTOM NAV
-======================================================== */
+/* ==================
+   MOBILE SEARCH BAR
+===================== */
 
 @media (max-width: 991px) {
   .mobile-search-container {
@@ -563,14 +563,14 @@ section {
 }
 
 /* logo responsiveness for mobile and tablet */
-@media (max-width:991px) {
+@media (max-width: 991px) {
     .navbar-brand img {
       transform: scale(0.80);
     }
 }
 
 /* logo responsiveness for small mobiles */
-@media (max-width:576px) {
+@media (max-width: 576px) {
     .navbar-brand img {
       transform: scale(0.70);
     }
